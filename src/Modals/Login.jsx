@@ -4,6 +4,7 @@ function Login({ isOpen, onClose }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -46,17 +47,27 @@ function Login({ isOpen, onClose }) {
                   required
                 />
               </div>
-              <div>
+              <div className="relative w-full">
                 <input
-                  type="password"
-                  id="password"
-                  name="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
                   className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#91ec59]"
+                  type={showPassword ? "text" : "password"}
                   placeholder="Enter your password"
+                  value={password}
+                  id="password"
+                  onChange={(e) => setPassword(e.target.value)}
                   required
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword((prev) => !prev)}
+                  className="absolute right-4 bottom-2 transform text-xl text-gray-600 hover:text-black"
+                >
+                  {showPassword ? (
+                    <i className="fa-regular fa-eye-slash"></i>
+                  ) : (
+                    <i className="fa-regular fa-eye"></i>
+                  )}
+                </button>
               </div>
               <div className="flex justify-between items-center mb-4">
                 <button
